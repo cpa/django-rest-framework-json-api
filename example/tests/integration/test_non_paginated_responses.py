@@ -31,6 +31,11 @@ def test_multiple_entries_no_pagination(multiple_entries, rf):
                 },
                 "relationships":
                 {
+                    'allComments': {
+                        'meta': {'count': 2},
+                        'data': [{'id': '1','type': 'comments'},
+                                 {'id': '2','type': 'comments'}]
+                    },
                     "blog": {
                         "data": {"type": "blogs", "id": "1"}
                     },
@@ -59,6 +64,11 @@ def test_multiple_entries_no_pagination(multiple_entries, rf):
                 },
                 "relationships":
                 {
+                    'allComments': {
+                        'meta': {'count': 2},
+                        'data': [{'id': '1','type': 'comments'},
+                                 {'id': '2','type': 'comments'}]
+                    },
                     "blog": {
                         "data": {"type": "blogs", "id": "2"}
                     },

@@ -43,6 +43,12 @@ class EntrySerializer(serializers.ModelSerializer):
     suggested = relations.SerializerMethodResourceRelatedField(
             source='get_suggested', model=Entry, read_only=True)
 
+    all_comments = relations.ResourceRelatedField(source='get_all_comments',
+            many=True, model=Comment, read_only=True)
+
+    def get_all_comments(self, obj):
+        return Comment.objects.all()
+
     def get_suggested(self, obj):
         return Entry.objects.exclude(pk=obj.pk).first()
 
@@ -52,7 +58,7 @@ class EntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Entry
         fields = ('blog', 'headline', 'body_text', 'pub_date', 'mod_date',
-                  'authors', 'comments', 'suggested',)
+                  'authors', 'comments', 'suggested', 'all_comments',)
         meta_fields = ('body_format',)
 
 
